@@ -1,0 +1,16 @@
+<!-- <p>
+  studentlist works!
+</p> -->
+Selected Rno:{{selstud.srno}}
+<br/>
+Selected Name:{{selstud.sname}}
+<br/>
+Selected Batch:{{selstud.sbatch}}
+<br/>
+Selected Department:{{selstud.sdept}}
+<br/>
+<app-student [rno]="item.rno"
+[name]="item.name"
+[batch]="item.batch"
+[dept]=item.dept *ngFor="let item of StudDetails" 
+(sendStud)="addStud($event)"></app-student>
