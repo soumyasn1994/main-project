@@ -48,7 +48,7 @@
 							<div class="navbar-nav secondfix ml-lg-auto">
 								<ul class="navbar-nav text-center">
 									<li class="nav-item active  mr-3">
-										<a class="nav-link" href="staff.php">Home
+										<a class="nav-link" href="form/staff.php">Home
 											<span class="sr-only">(current)</span>
 										</a>
 
@@ -60,14 +60,12 @@
 										<a class="nav-link" href="#contact">Contact</a>
 									</li>-->
 									<li class="nav-item">
-										<a class="nav-link" href="bookdetail.php">Job Request</a>
+										<a class="nav-link" href="">Job Request</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="profile.php">Profile</a>
 									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="empdetail.php">Update</a>
-									</li>
+									
 									<li class="nav-item">
 										<a class="nav-link" href="logout.php">Log Out </a>
 									</li>

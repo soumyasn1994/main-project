@@ -82,8 +82,9 @@
     		$( "#dob" ).datepicker({
 				dateFormat: 'yy-mm-dd',
 				yearRange: "1986:1998",
-				// minDate: +1, 
-				// maxDate: +30
+				defaultDate:new Date(1997,12,31),
+				//minDate: "1d", 
+				//maxDate: "1d"
 				changeMonth:true,
 				changeYear:true
 			});

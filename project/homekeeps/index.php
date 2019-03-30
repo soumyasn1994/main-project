@@ -20,21 +20,21 @@
 							<div class="carousel-item active">
 								<h3 class="b-w3ltxt text-capitalize mt-md-4">
 									<span>this is</span> salient</h3>
-								<p class="mt-2">onec consequat sapien ut leo cursus rhoncus. Nullam dui mi, vulputate ac metus semper.</p>
+								
 								<a class="btn btn-banner mt-md-3 mt-2 text-capitalize scroll" href="#services" role="button">explore services</a>
 							</div>
 							<!-- slider text -->
 							<div class="carousel-item">
 								<h3 class="b-w3ltxt text-capitalize mt-md-4">
 									<span>successful </span>careers</h3>
-								<p class="mt-2">onec consequat sapien ut leo cursus rhoncus. Nullam dui mi, vulputate ac metus semper.</p>
+								
 								<a class="btn btn-banner mt-md-3 mt-2 text-capitalize scroll" href="#services" role="button">explore services</a>
 							</div>
 							<!-- slider text -->
 							<div class="carousel-item text-white">
 								<h3 class="b-w3ltxt  text-capitalize mt-md-4">
 									<span>expert</span> consultants</h3>
-								<p class="mt-2">onec consequat sapien ut leo cursus rhoncus. Nullam dui mi, vulputate ac metus semper.</p>
+								
 								<a class="btn btn-banner mt-md-3 mt-2 text-capitalize scroll" href="#services" role="button">explore services</a>
 							</div>
 							<!-- slider text -->
@@ -57,8 +57,10 @@
 							<!-- <label for="exampleInputPassword1">Password</label> -->
 							<input name="pass" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
 						</div>
+						<div class="form-group">
 						    <button type="submit" name="submit" class="btn btn-primary px-5" value="login">Login</button>
-						<!--<a href="" class="btn btn-success float-right px-5">Sign Up</a>!-->
+						<a href="mails/forgotpassword.php" class="a">Forgot Password</a>
+						</div>
 					</form>
 				</div>
 				<!-- registration-end -->

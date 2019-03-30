@@ -24,31 +24,32 @@ if (isset($_POST["submit"])) {
 	
 	$sql = "select * from tb_login where Username='$user' and Password ='$pass' and status=1"; //value querried from the table
 	//print_r($sql);
+	//echo $sql;
 	
-	$res = mysqli_query($con, $sql);  //query executing function
-	if ($res){
+	 $res = mysqli_query($con, $sql);  //query executing function
+	if (mysqli_num_rows($res)>0){
 		$fetch = mysqli_fetch_assoc($res);
-			if ($fetch['role'] == '1') {
+			if ($fetch['roleid'] == '1') {
 //			$_SESSION["name"]=$fetch['name'];
 				$_SESSION["Log_id"] = $fetch['Log_id'];
 				$_SESSION["Username"] = $user;
 				// setting username as session variable 
-				 header("location:../admin.php");	//home page or the dashboard page to be redirected
+				 header("location:../adminhome.php");	//home page or the dashboard page to be redirected
 	
-			} elseif ($fetch['role'] == '2') {
+			} elseif ($fetch['roleid'] == '2') {
 				$_SESSION["Username"] = $user;	// setting username as session variable 
 				$_SESSION["Log_id"] = $fetch['Log_id'];
-				header("location:../staff.php");
-			} elseif ($fetch['role'] == '3') {
+				header("location:../form/staff.php");
+			} elseif ($fetch['roleid'] == '3') {
 				$_SESSION["Username"] = $user;	// setting username as session variable 
 				$_SESSION["Log_id"] = $fetch['Log_id'];
-				header("location:../user.php");
+				header("location:../form/userhome.php");
 			}
 	}
 
+
+   else{
+       echo "<script> alert('Unauthorized access!!!');window.location='../index.php';</script>";
+   }
 }
-   //else{
-    //    echo '<script> alert("Unauthorized access!!!");</script>';
-   // }
-//}
 ?>

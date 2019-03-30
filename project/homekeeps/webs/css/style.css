@@ -30,7 +30,7 @@ text-decoration: none;
 }
 input[type="button"],
 input[type="submit"] {
-transition: 0.5s all;
+transition: 0.5s all;b
 -webkit-transition: 0.5s all;
 -moz-transition: 0.5s all;
 -o-transition: 0.5s all;
@@ -124,7 +124,7 @@ margin: 0px;
 }
 .headder-contact {
 padding: 1em 3em;
-background:#02020c;
+background:#f70d0d;
 }
 
 /*--search--*/
@@ -168,10 +168,10 @@ width: 100%;
 }
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link, .dropdown-item.active, .dropdown-item:active {
 color: #000;
-background: #5cffdd;
+background: #2c741a;
 }
 .navbar-light .navbar-nav .nav-link {
-color: #fff;
+
 font-size: 14px;
 letter-spacing: 2px;
 text-transform: uppercase;
@@ -198,9 +198,8 @@ background: #5cffdd;
 }
 /*-- //nav --*/
 /*-- banner --*/ 
-.one-img{  background: url(../images/b1.jpg)no-repeat center;}
+.one-img{  background: url(../images/b2.jpg)no-repeat center;}
 .two-img{  background: url(../images/b2.jpg)no-repeat center;}
-.three-img{  background: url(../images/b3.jpg)no-repeat center;} 
 .slider-img{  background-size: cover;
 min-height: 800px;}  
 .rslides {
@@ -279,7 +278,7 @@ color: #fff;
 font-weight: bold;
 }
 a {
-color: #fff;
+color: #ced5dc;
 text-decoration: none;
 }
 /* Callback example */

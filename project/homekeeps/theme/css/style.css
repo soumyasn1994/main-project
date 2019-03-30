@@ -119,11 +119,9 @@ nav.navbar.fixed-top.navbar-expand-lg.navbar-light.navbar-fixed-top.top-nav-coll
     background: #fff;
     color: #c9333f;
 }
-
-.banner {
-    /* background: url(../images/banner.jpg)no-repeat center;
-     */
-     background-color: #006879;
+.banner{
+    background: url(../images/slide.png)no-repeat center;
+    background-color: #13045857;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

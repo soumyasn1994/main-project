@@ -7,54 +7,37 @@ include 'data/connect.php';
 <!-- //navbar -->
 <?php include('components/navs/regemp.php'); ?>
 <html>
-<link rel="stylesheet" type="text/css" href="https://rawgit.com/ozonhub/oh-autoVal/master/css/oh-autoval-style.css">
-<!-- Adding jQuery script. It must be before other script files -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
-<!-- Adding oh-autoVal script file -->
-<script src="https://rawgit.com/ozonhub/oh-autoVal/master/js/oh-autoval-script.js"></script>
-   
+<script type="text/javascript" src="validate.js"></script>
 <body>
 <div class="container mt-5 mb-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h2 class="text-secondary">Apply Now</h2><br><br>
-            <form id="employee" name="employee" action="data/empregistration.php" class="oh-autoval-form mt-5 mb-5 " method="post" onsubmit="return">
+            <form id="employee" name="employee" action="data/empregistration.php" enctype="multipart/form-data" class="oh-autoval-form mt-5 mb-5 " method="post">
 							<div class="form-group">	
 									<label for="first name"> Full Name:</label><br>
-							  	<input id="fn" value="<?php if(isset($_SESSION['fn'])) { 
-                        echo $_SESSION['fn'];
-                        } ?>" type="text" placeholder="Enter your First Name" name="fn" class="av-name form-control" av-message="Invalid Name" required="">
+							  	<input id="fn"  type="text" placeholder="Enter your First Name" name="fn" class="form-control" onchange="fun()" required="">
 							</div>
-							
-							<div class="form-group">
-                    <label for="hno" >House No:</label>
-                    <br><input type="text" name="hno" id="hno" value="<?php if(isset($_SESSION['hno'])) { 
-                        echo $_SESSION['hno'];
-                        } ?>" id="hno" placeholder="Enter your House Number" class="av-posnumber form-control" av-message="Invalid House Number">
-
-                 </div>
+							<div class="form-group">	
+									<label for="last name"> Full Name:</label><br>
+							  	<input id="ln"  type="text" placeholder="Enter your Last Name" name="ln" class="form-control" onchange="fun()" required="">
+							</div>
                 <div class="form-group">
                     <label for="house name">House Name:</label>
-                    <br><input type="text" name="hname" value="<?php if(isset($_SESSION['hname'])) { 
-                        echo $_SESSION['hname'];
-                        } ?>"  id="hname" placeholder="Enter your House Name" class="av-name form-control" av-message="Invalid House Name"></textarea>
+                    <br><input type="text" name="hname"   id="hname" placeholder="Enter your House Name" class="form-control" onchange="hn()"></textarea>
 
                 </div>
               
 								<div class="form-group">
 										<label for="place">Place:</label><br>
-										<input id="place" value="<?php if(isset($_SESSION['pla'])) { 
-                        echo $_SESSION['pla'];
-                        } ?>" name="place" placeholder="Enter your Place" class="av-name form-control" av-message="Invalid Place" required="">
+										<input id="place"  name="place" placeholder="Enter your Place" class="form-control" onchange="pl()" required="">
 								</div>
 								<div class="form-group">
 										<label for="pin">Pincode:</label><br>
-										<input type="text" value="<?php if(isset($_SESSION['pin'])) { 
-                        echo $_SESSION['pin'];
-                        } ?>"  placeholder="Enter your Pincode" name="pin" id="pin" class="av-pincode form-control" av-message="Invalid pincode">
+										<input type="text"   placeholder="Enter your Pincode" name="pin" id="pin" class="av-pincode form-control" onchange="pn()">
 								</div>
 								<div class="control-group">
-									<label class="control-label"><b>District:</b></label>
+									<label class="control-label">District:</label>
 									<div class="controls">
                                                                             <!--<input type="text" placeholder="Enter your country"  class="input-xlarge" required/>-->
                <select  name="district" id="district" required/>
@@ -68,29 +51,15 @@ include 'data/connect.php';
                 echo '<option value=' . $row['Did'] . '>' . $row['District'] . '</option>';
             }
             ?>
-              </select>
-									
-								<div class="form-group">
-				    				<label for="State">State:</label>
-                    <select id="stat" class="form-control" name="stat">
-                    <option value="select" >--Select--</option>
-                    <option value="Kerala">Kerala</option>
-                    <!--<option value="America">America</option>
-                    <option value="India">India</option>-->
-                    </select>
-                </div>
+			  </select>
+		</div>
+		</div>
+								
 								<div class="form-group">
 										<label for="email">Email:</label><br>
-										<input type="email" value="<?php if(isset($_SESSION['email'])) { 
-                        echo $_SESSION['email'];
-                        } ?>" id="email" placeholder="example@email.com" name="email" class="av-email form-control" av-message="Invalid email address" required="">
+										<input type="email" id="email" placeholder="example@email.com" name="email" class="form-control" onchange="em()" required="">
 								</div>
-								<div class="form-group">	
-									<label for="username"> UserName:</label><br>
-							  	<input id="un" name="un" value="<?php if(isset($_SESSION['un'])) { 
-                        echo $_SESSION['un'];
-                        } ?>" type="text" placeholder="Enter your First Name" name="un" class="av-username form-control" av-message="Invalid UserName" required="">
-							</div>
+								
 								<div class="form-group">
 										<label>Gender:</label><br>
               			<label class="radio-inline">
@@ -105,46 +74,45 @@ include 'data/connect.php';
     						</div>
     						<div class="form-group">
 										<label for="dob">Date of Birth:</label>
-										<input class="form-control" value="<?php if(isset($_SESSION['dob'])) { 
-                        echo $_SESSION['dob'];
-                        } ?>" type="text" placeholder="Select your Birth Date"  name="dob" required="" id="dob" readonly>
+										<input class="form-control" type="text" placeholder="Select your Birth Date"  name="dob" required="" id="dob" readonly>
 								</div>
-      					<div class="form-group">
-										<label for="photo">Photo:</label>
-										<input type="file" placeholder="Upload Photo" value="<?php if(isset($_SESSION['photo'])) { 
-                        echo $_SESSION['photo'];
-                        } ?>" name="photo" class="av-image form-control" av-message="Invalid Image Format" required="">
-								</div>
+								<div class="form-group">
+                    <label for="photo">Photo:</label>
+                    <input type="file" name="fileupload" accept="image/*" size="70" id="fileupload" class="form-control" required="">
+                </div> 
+								
       					<div class="form-group">
 										<label for="pwd">Password:</label><br>
-										<input  id="pass" type="password" value="<?php if(isset($_SESSION['pwd'])) { 
-                        echo $_SESSION['pwd'];
-                        } ?>" placeholder="Enter your Password" name="pass" class="av-password form-control" av-message="Invalid password" required="">
+										<input  id="pass" type="password"  placeholder="Enter your Password" name="pass" class="form-control" onchange="pwd()" required="">
 								</div>
-      					<div class="form-group">
-										<label for="category">Category:</label>
-        						<select id="cat" name="cat">
-            				<option value="select" >--select--</option>
-      							<option value="Cleaning">Cleaning</option>
-      							<option value="Carpentory">Painting</option>
-      							<option value="Repairing">Repairing</option>
-      							<option value="Home Maintenance">Home Maintenance</option>
-    								</select>
-    						</div>
+		                   
+							<div class="control-group">
+									<label class="control-label">Category:</label>
+									<div class="controls">
+                                                                            <!--<input type="text" placeholder="Enter your country"  class="input-xlarge" required/>-->
+               <select  name="cat" id="cat" required/>
+                  <option value="-1">select</option>
+                           
+            <?php
+            $q = mysqli_query($con, "SELECT * FROM tb_category where status=1");
+            //var_dump($q);
+
+            while ($row = mysqli_fetch_array($q)) {
+                echo '<option value=' . $row['cat_id'] . '>' . $row['cat_name'] . '</option>';
+            }
+            ?>
+              </select>
 								<div class="form-group">
 										<label for="mob">Mobile:</label><br>
-										<input id="mob" type="text" value="<?php if(isset($_SESSION['mob'])) { 
-                        echo $_SESSION['mob'];
-                        } ?>" placeholder="Enter Mobile Number" name="mob" class="av-mobile form-control" av-message="Invalid mobile" required="">
+										<input id="mob" type="text"  placeholder="Enter Mobile Number" name="mob" class="form-control" onchange="mb()" required="">
 								</div>
     						<div class="form-group">
 										<label>Aadhar Number:</label><br>
-										<input type="text" value="<?php if(isset($_SESSION['aadhar'])) { 
-                        echo $_SESSION['aadhar'];
-                        } ?>" placeholder="Enter your Aadhar Number" name="aadhar" id="aadhar" class="av-aadhaar form-control" av-message="Invalid Aadhar" required="">
+										<input type="text"  placeholder="Enter your Aadhar Number" name="aadhar" id="aadhar" class="form-control" onchange="ah()" required="">
+										<input type="file" name="fileup" accept="image/*" size="70" id="fileup" class="av-image form-control" av-message="Invalid Image Format" required="">
 								</div>
 								<div class="form-group">
-										<button type="submit" class="btn btn-default" name="submit" id="submit" action="data/login.php">Submit</button>
+										<button type="submit" class="btn btn-default" name="submit" id="submit" >Submit</button>
 								</div>
  				    </form>
         </div>

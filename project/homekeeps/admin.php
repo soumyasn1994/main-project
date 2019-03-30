@@ -8,5 +8,5 @@ if (!isset($_SESSION['Log_id'])){
 
 <?php include('components/top.php'); ?>
 <?php include('components/navs/adminhead.php'); ?>
-haiii.its me.........
 <?php include('components/end.php'); ?>
+

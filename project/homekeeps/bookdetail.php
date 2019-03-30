@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'data/connect.php'; 
  //$qry ="SELECT * From tb_booking WHERE status=0";
 

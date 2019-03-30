@@ -40,7 +40,7 @@ session_start();
     //if(mysqli_num_rows($count)<1){
      
         
-//    // $uid = $_SESSION['Reg_id'];
+//    // $uid = $_SESSION['Log_id'];
 // '$uid')"
 //  u_id
    
@@ -49,7 +49,7 @@ session_start();
      //$pass = $_POST['pass'];
       
 
-    //$uid = $_SESSION['Reg_id'];
+    //$uid = $_SESSION['Log_id'];
 	//, '$uid')"
 	//, u_id
     
@@ -103,7 +103,7 @@ session_start();
         // move_uploaded_file($_FILES['photo']['tmp_name'],'upload/'.$logid.'/'. $_FILES['photo']['name']);
 
   //$query = "INSERT INTO `tb_regsuser`(`Username`, `Password`, `First_Name`, `Last_Name`, `hno`, `hname`, `Place`, `Pin`, `dist`, `cont`, `Mobile`, `Email_id`, `Status`) VALUES ('$un','$pwd','$fn','$ln','$add','$pla',$pin,$mob,`$email`)";
-   $query = "INSERT INTO `tb_regsuser`(`Reg_id`, `Username`, `Password`,`Did`,`Place`,`State`, `Full_Name`, `hno`, `hname`, `Pin`, `Mobile`, `Email_id`) 
+   $query = "INSERT INTO `tb_regsuser`(`Log_id`, `Username`, `Password`,`Did`,`Place`,`State`, `Full_Name`, `hno`, `hname`, `Pin`, `Mobile`, `Email_id`) 
    VALUES ('$logid', '$un', '$pwd','$dist','$pla','$stat', '$fn', '$hno', '$hname', '$pin', '$mob', '$email')";
      echo  $query;
 

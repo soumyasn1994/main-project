@@ -1,38 +1,32 @@
 <?php 
 session_start();
-extract($_POST);
+//extract($_POST);
 ?>
 <?php
+
 $uid=$_SESSION['Log_id'];
 include 'data/connect.php';
-//$servername = "localhost";
-//$username = "root";
-//$password = "";
-//$dbname = "mansion";
+if (isset($_GET['bookdate'])) {
 
-// Create connection
-//$con = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-//if ($con->connect_error) {
-  //  die("Connection failed: " . $con->connect_error);
-//} 
-
-echo $sql = "INSERT INTO tb_booking (Log_id,service_id,data,location,status)
-VALUES ('$uid', '$wp', '$details','$loc','0')";
-
-if ($con->query($sql) === TRUE) {
+echo $sql = "INSERT INTO tb_booking (Log_id,eid,data,location,status)
+VALUES ('$uid', '$wp', '$details','$wl','0')";
+$exe=mysqli_query($con,$sql);
+if($exe)
+//if ($con->query($sql) === TRUE) 
+{
+  echo"<script> alert('New record created successfully');window.location ='emposearch.php';</script>";
 ?>
-<script>
+<!-- <script>
 alert('New record created successfully');
-window.location.href="webs/bookings.php";</script>  
+window.location="webs/bookings.php";</script>  
 <//?php } else {
-    ?>
+    ?> -->
 <script>
 alert('Failed , Try again later');
-window.location.href="webs/bookings.php";
+window.location="emposearch.php";
 </script> --> 
 <?php
 }
-
+}
 //$con->close();
 ?>

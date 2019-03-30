@@ -10,10 +10,14 @@ include 'data/connect.php';
 //getting id from url
 //$id = $_GET['Log_id'];
 $id = $_SESSION["Log_id"];
-$qry ="SELECT * From tb_regsuser WHERE Reg_id='$id'";
-echo "$qry";
+ $sq="select * from tb_login where Log_id='$id'";
+$re= mysqli_query($con,$sq);
+$recs=mysqli_fetch_array($re);
+$email=$recs['Username'];
+$qry ="SELECT * From tb_regsuser as t,tb_place as p, tb_district as d,tb_category as c WHERE t.Log_id='$id' and t.Pid=p.Pid and p.Did=d.Did and t.cat_id=c.cat_id";
+//echo "$qry";
 $records= mysqli_query($con,$qry);
-	$records= mysqli_query($con,$qry);
+	//$records= mysqli_query($con,$qry);
 	if(mysqli_num_rows($records)>=1){
 		while($row = mysqli_fetch_array($records)) {
 			//$fn = $row['firstname'];
@@ -21,65 +25,64 @@ $records= mysqli_query($con,$qry);
 			//$FBID = $row['FBID'];
 			//$IMGNU = $row['IMGNU'];
 
-	$fn =  $row['Full_Name'];
+	$fn =  $row['first_name'];
+	$ln =  $row['last_name'];
  $pl =  $row['Place'];
   $mob =  $row['Mobile'];
-  $cat =  $row['Category'];
-  $pin =  $row['Pincode'];
-  $eho =  $row['ehno'];
-  $eh =  $row['ehname'];
-	$email =  $row['Email_id'];
+  $cat =  $row['cat_name'];
+  $pin =  $row['Pin'];
+  $eho =  $row['hno'];
+  $eh =  $row['hname'];
+  $gender =  $row['Gender'];
+	//$email =  $row['Email'];
 	//$gen =  $row['optradio'];
   $dob =  $row['DOB'];
-  $pho =  $row['Photo'];
-  $ed =  $row['edist'];
-  $es =  $row['estat'];
-  $ahr =  $row['Aadhar'];
+	$pho =  $row['Photo'];
+	
+  $ed =  $row['District'];
+  //$es =  $row['estat'];
+   $ahr =  $row['Aadhar'];
 		}
 	}
 ?>
-
+<h5><a href="form/staff.php">Back to home</a></h5>
 <!-- banner -->
 <?php include('components/top.php'); ?>
 <!-- //navbar -->
-<?php include('components/navs/emp.php'); ?>
+<?php //include('components/navs/emp.php'); ?>
 
 <html>
-<link rel="stylesheet" type="text/css" href="https://rawgit.com/ozonhub/oh-autoVal/master/css/oh-autoval-style.css">
-<!-- Adding jQuery script. It must be before other script files -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
-<!-- Adding oh-autoVal script file -->
-<script src="https://rawgit.com/ozonhub/oh-autoVal/master/js/oh-autoval-script.js"></script>
+
    
 <body>
+<h1>Edit My Profile</h1>
 <div class="container mt-5 mb-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <!--<h2 class="text-secondary">Apply Now</h2><br><br>-->
-            <form id="employee" name="employee" action="data/editse.php" class="oh-autoval-form mt-5 mb-5 " method="post" onsubmit="return">
+            <form id="employee" name="employee" enctype="multipart/form-data" action="data/editse.php" class="form mt-5 mb-5 " method="post" onsubmit="return">
 							<div class="form-group">	
-									<label for="first name"> Full Name:</label><br>
-							  	<input id="fn" type="text" value="<?php echo "$fn" ?>" name="fn" class="av-name form-control" av-message="Invalid Name" required="">
+									<label for="first name"> First Name:</label><br>
+							  	<input id="fn" type="text" value="<?php echo "$fn" ?>" name="fn" class="form-control" onchange="fun()" required="">
 							</div>
-							
-							<div class="form-group">
-                    <label for="hno" >House No:</label>
-                    <br><input type="text" name="eho" id="eho" id="hno" value="<?php echo "$eho" ?>" class="av-posnumber form-control" av-message="Invalid House Number"></textarea>
-
-                 </div>
+							<div class="form-group">	
+									<label for="first name"> Last Name:</label><br>
+							  	<input id="ln" type="text" value="<?php echo "$ln" ?>" name="ln" class="form-control" onchange="fun()" required="">
+							</div>
+						
                 <div class="form-group">
                     <label for="house name">House Name:</label>
-                    <br><input type="text" name="eh"  id="eh" value="<?php echo "$eh" ?>" class="av-name form-control" av-message="Invalid House Name"></textarea>
+                    <br><input type="text" name="eh"  id="eh" value="<?php echo "$eh" ?>" class="form-control" onchange="hn()"></textarea>
 
                 </div>
               
 								<div class="form-group">
 										<label for="place">Place:</label><br>
-										<input id="pl" name="pl" value="<?php echo "$pl" ?>" class="av-name form-control" av-message="Invalid Place" required="">
+										<input id="pl" name="pl" value="<?php echo "$pl" ?>" class="form-control" onchange="pl()" required="">
 								</div>
 								<div class="form-group">
 										<label for="pin">Pincode:</label><br>
-										<input type="text" value="<?php echo "$pin" ?>" name="pin" id="pin" class="av-pincode form-control" av-message="Invalid pincode">
+										<input type="text" value="<?php echo "$pin" ?>" name="pin" id="pin" class="form-control" onchange="pn()">
 								</div>
 								<div class="form-group">
 				   				 <label for="dist">District:</label>
@@ -101,39 +104,44 @@ $records= mysqli_query($con,$qry);
                     <option value="Wayanad">Wayanad</option>
                     </select>
                 </div>
-								<div class="form-group">
+								<!-- <div class="form-group">
 				    				<label for="State">State:</label>
                     <select id="es" class="form-control" name="es">
                     <option value="select" ><?php echo "$es" ?></option>
                     <option value="Kerala">Kerala</option>
-                    <!--<option value="America">America</option>
-                    <option value="India">India</option>-->
+                    <option value="America">America</option>
+                    <option value="India">India</option>
                     </select>
-                </div>
+                </div> -->
 								<div class="form-group">
 										<label for="email">Email:</label><br>
-										<input type="email" id="email" value="<?php echo "$email" ?>" name="email" class="av-email form-control" av-message="Invalid email address" required="">
+										<input type="email" id="email" value="<?php echo "$email" ?>" name="email" class="form-control" onchange="em()" required="">
 								</div>
 								<div class="form-group">
 										<label>Gender:</label><br>
-										
+
+
+
+
               			<label class="radio-inline">
-                		<input type="radio" name="optradio" value="Male" >Male
+                		<input type="radio" name="optradio" value="Male" <?php if($gender == "Male") echo 'checked';?> >Male
               			</label>
               			<label class="radio-inline">
-                		<input type="radio" name="optradio" value="Female">Female
+                		<input type="radio" name="optradio" value="Female" <?php if($gender == "Female") echo 'checked';?>>Female
               			</label>
               			<label class="radio-inline">
-                		<input type="radio" name="optradio" value="Others">Others
+                		<input type="radio" name="optradio" value="Others" <?php if($gender == "Others") echo 'checked';?>>Others
               			</label>
     						</div>
-    						<div class="form-group">
+    						<!-- <div class="form-group">
 										<label for="dob">Date of Birth:</label>
 										<input class="form-control" type="text" value="<?php echo "$dob" ?>" name="dob" required="" id="dob" readonly>
-								</div>
+								</div> -->
       					<div class="form-group">
 										<label for="photo">Photo:</label>
-										<input type="file" value="<?php echo "$pho" ?>" id ="pho" name="pho" class="av-image form-control" av-message="Invalid Image Format" required="">
+										<img src="<?php echo "$pho"?>" width="130" height="130">
+										<input type="file" id ="fileupload" name="fileupload" class="form-control"  required="">
+										
 								</div>
       					<!--<div class="form-group">
 										<label for="pwd">Password:</label><br>
@@ -152,11 +160,11 @@ $records= mysqli_query($con,$qry);
     						</div>
 								<div class="form-group">
 										<label for="mob">Mobile:</label><br>
-										<input id="mob" type="text" value="<?php echo "$mob" ?>" name="mob" class="av-mobile form-control" av-message="Invalid mobile" required="">
+										<input id="mob" type="text" value="<?php echo "$mob" ?>" name="mob" class="form-control" onchange="mb()" required="">
 								</div>
     						<div class="form-group">
 										<label>Aadhar Number:</label><br>
-										<input type="text" value="<?php echo "$ahr" ?>" name="ahr" id="ahr" class="av-aadhaar form-control" av-message="Invalid mobile" required="">
+										<input type="text" value="<?php echo "$ahr" ?>" name="ahr" id="ahr" class="form-control"onchange="ah()" required="">
 								</div>
 								<div class="form-group">
 										<button type="submit" class="btn btn-default" name="submit" id="submit" action="data/login.php">Submit</button>
